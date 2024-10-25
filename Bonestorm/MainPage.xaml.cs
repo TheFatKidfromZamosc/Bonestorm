@@ -1,6 +1,7 @@
-﻿using System.Net;
+﻿using Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;
+using System.Net;
 using System.Text.Json;
-
+using System.Data;
 namespace Bonestorm
 {
     public partial class MainPage : ContentPage
@@ -24,12 +25,17 @@ namespace Bonestorm
         public MainPage()
         {
             InitializeComponent();
+            DateTime dzis = DateTime.Now;
+            dpData.MaximumDate = dzis;
+
         }
 
        private void BcurrencyUSD(object sender, EventArgs e )
         {
+            string data = dpData.Date.ToString("yyyy-MM-dd");
+
             string json;
-            string urlUSD = "https://api.nbp.pl/api/exchangerates/rates/c/usd/2024-10-22/?format=json";
+            string urlUSD = "https://api.nbp.pl/api/exchangerates/rates/c/usd/"+data+"/?format=json";
 
            
             using (var webClient = new WebClient() ) {
@@ -46,15 +52,17 @@ namespace Bonestorm
                  
         }
 
-        private void BcurrencyPLN(object sender, EventArgs e)
+        private void BcurrencyEUR(object sender, EventArgs e)
         {
+            string data = dpData.Date.ToString("yyyy-MM-dd");
+
             string json;
-            string urlPLN = "https://api.nbp.pl/api/exchangerates/rates/c/pln/2024-10-22/?format=json";
+            string urlEUR = "https://api.nbp.pl/api/exchangerates/rates/c/eur/"+data+"/?format=json";
 
 
             using (var webClient = new WebClient())
             {
-                json = webClient.DownloadString(urlPLN);
+                json = webClient.DownloadString(urlEUR);
             }
 
             Currency c = JsonSerializer.Deserialize<Currency>(json);
@@ -63,7 +71,7 @@ namespace Bonestorm
             s += $"Data : {c.rates[0].effectiveDate} \n";
             s += $"Cena skupu : {c.rates[0].bid} \n";
             s += $"Cena sprzedazy : {c.rates[0].ask} \n ";
-            textCurrencyPLN.Text = s;
+            textCurrencyEUR.Text = s;
 
         }
     }

@@ -7,7 +7,10 @@
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
-            
+            <DatePicker
+                x:Name="dpData"
+                MinimumDate="2003-02-01"
+                />
             <Button
                 x:Name="Ameryka"
                 Text="USD" 
@@ -19,12 +22,12 @@
 
             <Button
      x:Name="JanPawelSobieski3"
-     Text="PLN" 
+     Text="EUR" 
      SemanticProperties.Hint="Counts the number of times you click"
-     Clicked="BcurrencyPLN"
+     Clicked="BcurrencyEUR"
      HorizontalOptions="Fill" 
      />
-            <Label x:Name="textCurrencyPLN" Text=""></Label>
+            <Label x:Name="textCurrencyEUR" Text=""></Label>
         </VerticalStackLayout>
     </ScrollView>
 
